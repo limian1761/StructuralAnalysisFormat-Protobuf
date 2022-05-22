@@ -1,0 +1,343 @@
+// www.saf.guide
+// li chao, 252429238@qq.com
+
+syntax = "proto3";
+
+package basf;
+
+
+message Project{
+
+	message ProjectInfo{
+	
+		string name = 1;
+		string description = 2;
+		string projecT_nr = 3;
+		string  created = 4;
+		string  lasT_update = 5;
+		string project_type = 6;
+		string project_kind = 7;
+		string building_type = 8;
+		string status = 9;
+		string location = 10;
+		string id = 11;
+	}
+	ProjectInfo project_info = 1 ;
+
+	message Model{
+		string name = 1;
+		string description = 2;
+		string discipline = 3;
+		string level_of_detail = 4;
+		string status = 5;
+		string owner = 6;
+		string revision_number = 7;
+		string  created = 8;
+		string  last_update = 9;
+		string source_type = 10;
+		string source_applicatio = 11;
+		string saf_version = 12;
+		string source_company = 13;
+		enum GlobalCoordinateSystem
+		{
+			X_vertical = 0;
+			Y_vertical = 1;
+			Z_vertical = 2;
+			minus_X_vertical = 3;
+			minus_Y_vertical = 4;
+			minus_Z_vertical = 5;
+		}
+		GlobalCoordinateSystem global_coordinate_system = 14;
+		
+		enum LcsOfCrossSection
+		{
+			ZYX = 0;
+			minusyzx = 1;
+			minuszminusyx = 2;
+			yminuszx = 3;
+			yzminusx = 4;
+			minuszyminusx = 5;
+			minusyminuszminusx = 6;
+			zminusyminusx = 7;
+		}
+		LcsOfCrossSection lcs_of_cross_section = 15;
+
+		enum SystemOfUnits
+		{
+			metric =0;
+			imperial=1;
+		}
+		SystemOfUnits system_of_units = 16;
+
+		enum NationalCode
+		{
+			gb =0;
+			ec_standard_en =1;
+			ec_onorm_en=2;
+			ec_nbn_en=3;
+			ec_bs_en =4;
+			ec_cys_en =5;
+			ec_csn_en =6;
+			ec_ds_en =7;
+			ec_nen_en =8;
+			ec_sfs_en =9;
+			ec_nf_en =10;
+			ec_din_en =11;
+			ec_eloT_en =12;
+			ec_is_en =13;
+			ec_uni_en =14;
+			ec_lu_en =15;
+			ec_ms_en =16;
+			ec_ns_en =17;
+			ec_pn_en =18;
+			ec_sr_en =19;
+			ec_ss_en_singaporean =20;
+			ec_stn_en =21;
+			ec_sisT_en =22;
+			ec_une_en =23;
+			ec_ss_en_swedish =24;
+			ibc =25;
+			nbr =26;
+		}
+		NationalCode national_code = 17;
+		string ignored_objects = 18;
+		string id = 19;
+	}
+	Model mode = 2;
+
+	message Material
+	{
+		string name  = 1 ;
+		enum Type{
+			concrete = 0;
+			steel = 1;
+			timber = 2;
+			aluminium = 3;
+			masonry = 4;
+			other = 5;
+		}
+		Type type = 2;
+		string subtype = 3;
+		string quality  = 4;
+		double unit_mass  = 5; //[kg/m3]
+		double e_modulus  = 6; //[mpa]
+		double g_modulus  = 7; //[mpa]
+		double poisson_coefficient  = 8;
+		double thermal_expansion = 9 ; //[1/k]
+		double design_properties   = 10;
+		string id   = 11;
+	}
+	repeated Material materials = 3;	
+
+
+	message CrossSection
+	{
+		string name  = 1;
+		string material = 2;
+		enum Cross_section_type
+		{
+			parametric = 0;
+			manufactured = 1;
+			compound = 2;
+			general = 3;
+		}
+		Cross_section_type cross_section_type = 3;
+
+		enum Shape
+		{
+			//parametric  section
+			circle =0;
+			rectangle =1;
+			double_rectangle =2;
+			triple_rectangle =3;
+			rectangle_with_plates =4;
+			double_rectangle_with_plates =5;
+			I_section =6;
+			I_section_with_haunch =7;
+			I_section_with_haunch_asymmetric =8;
+			T_section =9;
+			T_section_with_haunch =10;
+			C_section =11;
+			L_section =12;
+			L_section_opposite =13;
+			U_section =14;
+			oval =15;
+			pipe =16;
+			polygon =17;
+			trapezoid =18;
+			X_section =19;
+			Z_section =20;
+			box =21;
+			double_box =22;
+			I_rolled =23;
+			I_rolled_asymmetric =24;
+			tube =25;
+			angle =26;
+			channel =27;
+			T_tee =28;
+			Z_zee =29;
+			cold_formed_channel =30;
+			cold_formed_channeL_with_lips =31;
+			cold_formed_zee =32;
+			
+			//compound section
+			double_I_section =33;
+			double_channeL_ftf =34;
+			double_channeL_btb =35;
+			starred_angle =36;
+			double_angle_btb =37;
+			double_angle_ftf =38;
+			double_angle_btb_ll =39;
+			double_angle_ftf_ll =40;
+			four_angle_btb =41;
+			four_angle_ftf =42;
+			four_angle_I =43;
+			double_pipe =44;
+
+		}
+		Shape shape = 4;
+		string parameters = 5;
+		string profile = 6;
+
+		enum FormCode
+		{
+			true = 0;
+			false = 1;
+
+		}
+		FormCode form_code = 7;
+		string  description_id = 8;
+		double A  = 9;
+		double Iy = 10;
+		double Iz = 11;
+		double It = 12;
+		double Iw = 13;
+		double Wply = 14;
+		double Wplz = 15;
+		string id = 16;
+		string gen_polygon = 17;
+	}
+	repeated CrossSection cross_sections = 4;
+
+	message Node
+	{
+		string name = 1;
+		double coordinate_X = 2;
+		double coordinate_Y = 3;
+		double coordinate_Z = 4;
+		string id = 5;
+	}
+	repeated  Node nodes = 5 ;
+
+
+	message InternalEdge
+	{
+		string name = 1;
+		string member_2D = 2;
+		string nodes = 3;
+		string segments = 4;
+		string parent_id = 5;
+		string id = 6;
+
+	}
+	repeated InternalEdge edges = 6;
+
+	message Member1D
+	{
+		string name = 1;
+		string type = 2;
+		string cross_section = 3;
+		string arbitrary_definition = 4;
+		string segments = 5;
+		string begin_node = 6;
+		string end_node = 7;
+		string internal_nodes = 8;
+		double length  = 9;
+
+		enum Geometrical_shape
+		{
+			line = 0;
+			circular_arc = 1;
+			parabolic_arc = 2;
+			bezier = 3;
+			spline = 4;
+			polyline = 5;
+		}
+		Geometrical_shape geometrical_shape = 10;
+
+		enum LCS
+		{
+			Y_by_vector = 0;
+			z_by_vector = 1;
+			Y_by_point = 2;
+			z_by_point = 3;
+		}
+		LCS lcs = 101;
+
+		double LCS_rotation = 12;
+		double coordinate_X =13;
+		double coordinate_Y =14;
+		double coordinate_Z =15;
+		
+		enum Systemine
+		{
+			centre = 0;
+			top = 1;
+			bottom = 2;
+			left = 3;
+			right = 4;
+			top_left = 5;
+			top_right = 6;
+			bottom_left = 7;
+			bottom_right = 8;
+		}
+		Systemine system_line = 16;
+		
+		double structural_Y_eccentricity_of_beg_Node = 17;
+		double structural_Z_eccentricity_of_beg_Node = 18;
+		double structural_Y_eccentricity_of_end_Node = 19;
+		double structural_Z_eccentricity_of_end_Node = 20;
+		double analysis_Y_eccentricity_of_beg_Node = 21;
+		double analysis_Z_eccentricity_of_beg_Node = 22;
+		double analysis_Y_eccentricity_of_end_Node = 23;
+		double analysis_Z_eccentricity_of_end_Node = 24;
+
+		string layer = 25;
+		enum BehaviourInAnalysis
+		{
+			standard =0;
+			axial_force_only =1;
+			compression_only =2;
+			tension_only =3;
+		}
+		BehaviourInAnalysis behaviour_in_analysis = 26;
+
+		string color = 27;
+		string parent_id = 28;
+		string id = 29;
+	}
+	repeated Member1D member_1Ds = 7;
+
+	message MemberVarying1D
+	{
+		string name = 1;
+		string cross_sections = 2;
+		double span = 3;
+
+		enum Alignment
+		{
+			centre = 0;
+			top = 1;
+			bottom = 2;
+			left = 3;
+			right = 4;
+			top_left = 5;
+			top_right = 6;
+			bottom_left = 7;
+			bottom_right = 8;
+		}
+		Alignment alignment = 4;
+		string id = 5;
+	}
+	MemberVarying1D member_varying_1D = 8;
+}
