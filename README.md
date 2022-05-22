@@ -1,6 +1,7 @@
 # StructuralAnalysisFormat-Protobuf
+
 A protobuf for www.saf.guide
 
-# About SAF
+## About SAF
 
 www.saf.guide
