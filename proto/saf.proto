@@ -1,0 +1,762 @@
+// www.saf.guide
+// li chao, 252429238@qq.com
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+package saf;
+
+message Project {
+    string name = 1;
+    string description = 2;
+    string project_nr = 3;
+    string created = 4;
+    string last_update = 5;
+    string project_type = 6;
+    string project_kind = 7;
+    string building_type = 8;
+    string status = 9;
+    string location = 10;
+    string id = 11;
+}
+message Model {
+    string name = 1;
+    string description = 2;
+    string discipline = 3;
+    string level_of_detail = 4;
+    string status = 5;
+    string owner = 6;
+    string revision_number = 7;
+    string created = 8;
+    string last_update = 9;
+    string source_type = 10;
+    string source_application = 11;
+    string saf_version = 12;
+    string source_company = 13;
+    string global_coordinate_system = 14;
+    string lcs_of_cross_section = 15;
+    string system_of_units = 16;
+    string national_code = 17;
+    string ignored_strings = 18;
+    string ignored_groups = 19;
+    string id = 20;
+}
+message Material {
+    string name = 1;
+    string type = 2;
+    double subtype = 3;
+    string quality = 4;
+    double unit_mass = 5;
+    double e_modulus = 6;
+    double g_modulus = 7;
+    double poisson_coefficient = 8;
+    double thermal_expansion = 9;
+    double design_properties = 10;
+    string id = 11;
+}
+message CrossSection {
+    string name = 1;
+    string material = 2;
+    string cross_section_type = 3;
+    string shape = 4;
+    string parameters = 5;
+    string profile = 6;
+    double form_code = 7;
+    double description_id_of_the_profile = 8;
+    double a = 9;
+    double iy = 10;
+    double iz = 11;
+    double it = 12;
+    double iw = 13;
+    double wply = 14;
+    double wplz = 15;
+    string id = 16;
+}
+message CompositeShapeDef {
+    string name = 1;
+    string material_name_1 = 2;
+    string polygon_contour_1 = 3;
+    double id = 4;
+}
+message PointConnection {
+    string name = 1;
+    double coordinate_x = 2;
+    double coordinate_y = 3;
+    double coordinate_z = 4;
+    string id = 5;
+}
+message CurveEdge {
+    string name = 1;
+    string member_2d = 2;
+    string nodes = 3;
+    string segments = 4;
+    string parent_id = 5;
+    string id = 6;
+}
+message CurveMember {
+    string name = 1;
+    string type = 2;
+    string cross_section = 3;
+    string arbitrary_definition = 4;
+    string nodes = 5;
+    string segments = 6;
+    double internal_nodes = 7;
+    double length = 8;
+    string geometrical_shape = 9;
+    string lcs = 10;
+    double lcs_rotation = 11;
+    double coordinate_x = 12;
+    double coordinate_y = 13;
+    double coordinate_z = 14;
+    string system_line = 15;
+    double structural_y_eccentricity_of_beg_node = 16;
+    double structural_y_eccentricity_of_end_node = 17;
+    double structural_z_eccentricity_of_beg_node = 18;
+    double structural_z_eccentricity_of_end_node = 19;
+    double analysis_y_eccentricity_of_beg_node = 20;
+    double analysis_y_eccentricity_of_end_node = 21;
+    double analysis_z_eccentricity_of_beg_node = 22;
+    double analysis_z_eccentricity_of_end_node = 23;
+    string layer = 24;
+    string behaviour_in_analysis = 25;
+    string color = 26;
+    string parent_id = 27;
+    string id = 28;
+}
+message CurveMemberVarying {
+    string name = 1;
+    string cross_sections_1 = 2;
+    double span_1 = 3;
+    string alignment_1 = 4;
+    string cross_sections_2 = 5;
+    double span_2 = 6;
+    string alignment_2 = 7;
+    string cross_sections_3 = 8;
+    double span_3 = 9;
+    string alignment_3 = 10;
+    string id = 11;
+}
+message CurveMemberRib {
+    string name = 1;
+    string member_2d = 2;
+    string cross_section = 3;
+    string nodes = 4;
+    string segments = 5;
+    double internal_nodes = 6;
+    double length = 7;
+    string geometrical_shape = 8;
+    string alignment = 9;
+    double eccentricity_ez = 10;
+    string type_of_connection = 11;
+    string shape_of_the_rib = 12;
+    string layer = 13;
+    string behaviour_in_analysis = 14;
+    string effective_width = 15;
+    double width_left_for_check = 16;
+    double width_right_for_check = 17;
+    double width_left_for_internal_forces = 18;
+    double width_right_for_internal_forces = 19;
+    string color = 20;
+    string parent_id = 21;
+    string id = 22;
+}
+message SurfaceMember {
+    string name = 1;
+    string type = 2;
+    string material = 3;
+    string thickness_type = 4;
+    string thickness = 5;
+    string system_plane_at = 6;
+    string nodes = 7;
+    double internal_nodes = 8;
+    string edges = 9;
+    double area = 10;
+    string layer = 11;
+    string lcs_type = 12;
+    double coordinate_x = 13;
+    double coordinate_y = 14;
+    double coordinate_z = 15;
+    double lcs_rotation = 16;
+    double structural_z_eccentricity = 17;
+    double analysis_z_eccentricity = 18;
+    string shape = 19;
+    string behavior_in_analysis = 20;
+    string color = 21;
+    string parent_id = 22;
+    string id = 23;
+}
+message SurfaceMemberOpening {
+    string name = 1;
+    string member_2d = 2;
+    string nodes = 3;
+    string edges = 4;
+    double area = 5;
+    string parent_id = 6;
+    string id = 7;
+}
+message SurfaceMemberRegion {
+    string name = 1;
+    string material = 2;
+    double thickness = 3;
+    string system_plane_at = 4;
+    string member_2d = 5;
+    string nodes = 6;
+    string edges = 7;
+    double eccentricity_ez = 8;
+    double area = 9;
+    string parent_id = 10;
+    string id = 11;
+}
+message Storey {
+    string name = 1;
+    double height_level = 2;
+    string id = 3;
+}
+message ProxyElement {
+    string name = 1;
+    string material = 2;
+    string color = 3;
+    string layer = 4;
+    string id = 5;
+}
+message ProxyElementVertices {
+    string structural_proxy_element = 1;
+    double index = 2;
+    double x = 3;
+    double y = 4;
+    double z = 5;
+}
+message ProxyElementFaces {
+    string structural_proxy_element = 1;
+    double index = 2;
+    string definition = 3;
+}
+message PointSupport {
+    string name = 1;
+    string type = 2;
+    string boundary_condition = 3;
+    string node = 4;
+    string member = 5;
+    string coordinate_system = 6;
+    string origin = 7;
+    string coordinate_definition = 8;
+    double position_x = 9;
+    string ux = 10;
+    string uy = 11;
+    string uz = 12;
+    string fix = 13;
+    string fiy = 14;
+    string fiz = 15;
+    double stiffness_x = 16;
+    double stiffness_y = 17;
+    double stiffness_z = 18;
+    double stiffness_fix = 19;
+    double stiffness_fiy = 20;
+    double stiffness_fiz = 21;
+    string id = 22;
+}
+message SurfaceConnection {
+    string name = 1;
+    string member_2d = 2;
+    string member_2d_region = 3;
+    string subsoil = 4;
+    string description = 5;
+    double c1x = 6;
+    double c1y = 7;
+    string c1z_spring = 8;
+    double c1z = 9;
+    double c2x = 10;
+    double c2y = 11;
+    string parent_id = 12;
+    string id = 13;
+}
+message CurveConnection {
+    string name = 1;
+    string type = 2;
+    string member = 3;
+    string member_rib = 4;
+    string ux = 5;
+    string uy = 6;
+    string uz = 7;
+    string fix = 8;
+    string fiy = 9;
+    string fiz = 10;
+    double stiffness_x = 11;
+    double stiffness_y = 12;
+    double stiffness_z = 13;
+    double stiffness_fix = 14;
+    double stiffness_fiy = 15;
+    double stiffness_fiz = 16;
+    string coordinate_system = 17;
+    string coordinate_definition = 18;
+    string origin = 19;
+    double start_point = 20;
+    double end_point = 21;
+    string parent_id = 22;
+    string id = 23;
+}
+message EdgeConnection {
+    string name = 1;
+    string type = 2;
+    string boundary_condition = 3;
+    string member_2d = 4;
+    double member_2d_region = 5;
+    string member_2d_opening = 6;
+    double edge = 7;
+    string internal_edge = 8;
+    string ux = 9;
+    string uy = 10;
+    string uz = 11;
+    string fix = 12;
+    string fiy = 13;
+    string fiz = 14;
+    double stiffness_x = 15;
+    double stiffness_y = 16;
+    double stiffness_z = 17;
+    double stiffness_fix = 18;
+    double stiffness_fiy = 19;
+    double stiffness_fiz = 20;
+    string coordinate_system = 21;
+    string coordinate_definition = 22;
+    string origin = 23;
+    double start_point = 24;
+    double end_point = 25;
+    string parent_id = 26;
+    string id = 27;
+}
+message RelConnectsMember {
+    string name = 1;
+    string member = 2;
+    string position = 3;
+    string ux = 4;
+    string uy = 5;
+    string uz = 6;
+    string fix = 7;
+    string fiy = 8;
+    string fiz = 9;
+    double stiffness_x = 10;
+    double stiffness_y = 11;
+    double stiffness_z = 12;
+    double stiffness_fix = 13;
+    double stiffness_fiy = 14;
+    double stiffness_fiz = 15;
+    string parent_id = 16;
+    string id = 17;
+}
+message RelConnectsSurfaceEdge {
+    string name = 1;
+    string member_2d = 2;
+    double edge = 3;
+    string ux = 4;
+    string uy = 5;
+    string uz = 6;
+    string fix = 7;
+    string fiy = 8;
+    string fiz = 9;
+    double stiffness_x = 10;
+    double stiffness_y = 11;
+    double stiffness_z = 12;
+    double stiffness_fix = 13;
+    double stiffness_fiy = 14;
+    double stiffness_fiz = 15;
+    string coordinate_definition = 16;
+    string origin = 17;
+    double start_point = 18;
+    double end_point = 19;
+    string parent_id = 20;
+    string id = 21;
+}
+message RelConnectsRigidCross {
+    string name = 1;
+    string member_1ds = 2;
+    string type = 3;
+    string u1 = 4;
+    string u2 = 5;
+    string u = 6;
+    string fi1 = 7;
+    string fi2 = 8;
+    string fi = 9;
+    double stiffness_u1 = 10;
+    double resistance_u1 = 11;
+    double stiffness_u2 = 12;
+    double resistance_u2 = 13;
+    double stiffness_u = 14;
+    double resistance_u = 15;
+    double stiffness_fi1 = 16;
+    double resistance_fi1 = 17;
+    double stiffness_fi2 = 18;
+    double resistance_fi2 = 19;
+    double stiffness_fi = 20;
+    double resistance_fi = 21;
+    string parent_id = 22;
+    string id = 23;
+}
+message RelConnectsRigidLink {
+    string name = 1;
+    string nodes = 2;
+    string hinge_position = 3;
+    string ux = 4;
+    string uy = 5;
+    string uz = 6;
+    string fix = 7;
+    string fiy = 8;
+    string fiz = 9;
+    double stiffness_x = 10;
+    double resistance_x = 11;
+    double stiffness_y = 12;
+    double resistance_y = 13;
+    double stiffness_z = 14;
+    double resistance_z = 15;
+    double stiffness_fix = 16;
+    double resistance_fix = 17;
+    double stiffness_fiy = 18;
+    double resistance_fiy = 19;
+    double stiffness_fiz = 20;
+    double resistance_fiz = 21;
+    string id = 22;
+}
+message RelConnectsRigidMember {
+    string name = 1;
+    string node = 2;
+    string member_2ds = 3;
+    double edges = 4;
+    double internal_edge = 5;
+    double member_1ds = 6;
+    string type = 7;
+    string ux = 8;
+    string uy = 9;
+    string uz = 10;
+    string fix = 11;
+    string fiy = 12;
+    string fiz = 13;
+    double stiffness_x = 14;
+    double resistance_x = 15;
+    double stiffness_y = 16;
+    double resistance_y = 17;
+    double stiffness_z = 18;
+    double resistance_z = 19;
+    double stiffness_fix = 20;
+    double resistance_fix = 21;
+    double stiffness_fiy = 22;
+    double resistance_fiy = 23;
+    double stiffness_fiz = 24;
+    double resistance_fiz = 25;
+    string id = 26;
+}
+message LoadGroup {
+    string name = 1;
+    string load_group_type = 2;
+    string relation = 3;
+    string load_type = 4;
+    string id = 5;
+}
+message LoadCase {
+    string name = 1;
+    double description = 2;
+    string action_type = 3;
+    string load_group = 4;
+    string load_type = 5;
+    string duration = 6;
+    string id = 7;
+}
+message LoadCombination {
+    string name = 1;
+    string description = 2;
+    string category = 3;
+    double national_standard = 4;
+    string type = 5;
+    double load_factor_1 = 6;
+    double multiplier_1 = 7;
+    string load_case_name_1 = 8;
+    double load_factor_2 = 9;
+    double multiplier_2 = 10;
+    string load_case_name_2 = 11;
+    string id = 12;
+}
+message PointAction {
+    string name = 1;
+    string type = 2;
+    string direction = 3;
+    string force_action = 4;
+    string reference_node = 5;
+    string reference_member = 6;
+    double value = 7;
+    double vector_ = 8;
+    string load_case = 9;
+    string coordinate_system = 10;
+    string origin = 11;
+    string coordinate_definition = 12;
+    double position_x = 13;
+    double repeat = 14;
+    double delta_x = 15;
+    string id = 16;
+}
+message PointMoment {
+    string name = 1;
+    string type = 2;
+    string direction = 3;
+    string force_action = 4;
+    string reference_node = 5;
+    string reference_member = 6;
+    double value = 7;
+    string load_case = 8;
+    string coordinate_system = 9;
+    string origin = 10;
+    string coordinate_definition = 11;
+    double position_x = 12;
+    double repeat = 13;
+    double delta_x = 14;
+    string id = 15;
+}
+message CurveAction {
+    string name = 1;
+    string type = 2;
+    string force_action = 3;
+    string distribution = 4;
+    string direction = 5;
+    double value_1 = 6;
+    double value_2 = 7;
+    double vector_1 = 8;
+    double vector_2 = 9;
+    string member = 10;
+    double member_rib = 11;
+    string member_2d = 12;
+    double member_2d_region = 13;
+    string member_2d_opening = 14;
+    double edge = 15;
+    string internal_edge = 16;
+    string load_case = 17;
+    string coordinate_system = 18;
+    string location = 19;
+    string coordinate_definition = 20;
+    string origin = 21;
+    string extent = 22;
+    double start_point = 23;
+    double end_point = 24;
+    double eccentricity_ey = 25;
+    double eccentricity_ez = 26;
+    string parent_id = 27;
+    string id = 28;
+}
+message CurveMoment {
+    string name = 1;
+    string type = 2;
+    string force_action = 3;
+    string distribution = 4;
+    string direction = 5;
+    double value_1 = 6;
+    double value_2 = 7;
+    string member = 8;
+    string member_rib = 9;
+    string member_2d = 10;
+    string member_2d_region = 11;
+    double member_2d_opening = 12;
+    double edge = 13;
+    string internal_edge = 14;
+    string load_case = 15;
+    string coordinate_system = 16;
+    string location = 17;
+    string coordinate_definition = 18;
+    string origin = 19;
+    string extent = 20;
+    double start_point = 21;
+    double end_point = 22;
+    string parent_id = 23;
+    string id = 24;
+}
+message SurfaceAction {
+    string name = 1;
+    string direction = 2;
+    string type = 3;
+    string force_action = 4;
+    double value = 5;
+    string member_2d = 6;
+    string member_2d_region = 7;
+    string member_2d_distribution = 8;
+    string load_case = 9;
+    string coordinate_system = 10;
+    string location = 11;
+    string parent_id = 12;
+    string id = 13;
+}
+message SurfaceActionThermal {
+    string name = 1;
+    string variation = 2;
+    double tempt = 3;
+    double tempb = 4;
+    string member_2d = 5;
+    string member_2d_region = 6;
+    string load_case = 7;
+    string parent_id = 8;
+    string id = 9;
+}
+message CurveActionThermal {
+    string name = 1;
+    string force_action = 2;
+    string variation = 3;
+    double deltat = 4;
+    double templ = 5;
+    double tempr = 6;
+    double tempt = 7;
+    double tempb = 8;
+    string member = 9;
+    string member_rib = 10;
+    string load_case = 11;
+    string coordinate_definition = 12;
+    string origin = 13;
+    double start_point = 14;
+    double end_point = 15;
+    string parent_id = 16;
+    double id = 17;
+}
+message PointActionFree {
+    string name = 1;
+    string type = 2;
+    string direction = 3;
+    double value = 4;
+    double vector_ = 5;
+    string load_case = 6;
+    double coordinate_x = 7;
+    double coordinate_y = 8;
+    double coordinate_z = 9;
+    string coordinate_system = 10;
+    string id = 11;
+}
+message CurveActionFree {
+    string name = 1;
+    string type = 2;
+    string distribution = 3;
+    string direction = 4;
+    double value_1 = 5;
+    double value_2 = 6;
+    double vector_1 = 7;
+    double vector_2 = 8;
+    string load_case = 9;
+    string coordinate_x = 10;
+    string coordinate_y = 11;
+    string coordinate_z = 12;
+    string segments = 13;
+    string coordinate_system = 14;
+    string location = 15;
+    string id = 16;
+}
+message SurfaceActionFree {
+    string name = 1;
+    string direction = 2;
+    string type = 3;
+    string distribution = 4;
+    double q = 5;
+    string load_case = 6;
+    string coordinate_x = 7;
+    string coordinate_y = 8;
+    string coordinate_z = 9;
+    string edges = 10;
+    string coordinate_system = 11;
+    string location = 12;
+    string id = 13;
+}
+message SurfaceActionDistri {
+    string name = 1;
+    string type = 2;
+    string nodes = 3;
+    string edges = 4;
+    string layer = 5;
+    string lcs_type = 6;
+    double coordinate_x = 7;
+    double coordinate_y = 8;
+    double coordinate_z = 9;
+    double lcs_rotation = 10;
+    string distribution_to = 11;
+    string load_applied_to = 12;
+    double id = 13;
+}
+message PointSupportDef {
+    string name = 1;
+    string point_support = 2;
+    string direction = 3;
+    double translation_value = 4;
+    double rotation_value = 5;
+    string load_case = 6;
+    double id = 7;
+}
+message ResultInternalForce1D {
+    string result_on = 1;
+    string member = 2;
+    double member_rib = 3;
+    string result_for = 4;
+    double load_case = 5;
+    string load_combination = 6;
+    double combination_key = 7;
+    double section_at = 8;
+    double index = 9;
+    double n = 10;
+    double vy = 11;
+    double vz = 12;
+    double mx = 13;
+    double my = 14;
+    double mz = 15;
+}
+message ResultInternalForce2DEdge {
+    string result_on = 1;
+    string member_2d = 2;
+    double edge = 3;
+    string result_for = 4;
+    string load_case = 5;
+    double load_combination = 6;
+    double combination_key = 7;
+    double section_at = 8;
+    double index = 9;
+    double mx = 10;
+    double my = 11;
+    double mxy = 12;
+    double vx = 13;
+    double vy = 14;
+    double nx = 15;
+    double ny = 16;
+    double nxy = 17;
+}
+
+message SAF {
+    Project project = 1;
+    Model model = 2;
+    repeated Material structuralmaterial = 3;
+    repeated CrossSection structuralcrosssection = 4;
+    repeated CompositeShapeDef compositeshapedef = 5;
+    repeated PointConnection structuralpointconnection = 6;
+    repeated CurveEdge structuralcurveedge = 7;
+    repeated CurveMember structuralcurvemember = 8;
+    repeated CurveMemberVarying structuralcurvemembervarying = 9;
+    repeated CurveMemberRib structuralcurvememberrib = 10;
+    repeated SurfaceMember structuralsurfacemember = 11;
+    repeated SurfaceMemberOpening structuralsurfacememberopening = 12;
+    repeated SurfaceMemberRegion structuralsurfacememberregion = 13;
+    repeated Storey structuralstorey = 14;
+    repeated ProxyElement structuralproxyelement = 15;
+    repeated ProxyElementVertices structuralproxyelementvertices = 16;
+    repeated ProxyElementFaces structuralproxyelementfaces = 17;
+    repeated PointSupport structuralpointsupport = 18;
+    repeated SurfaceConnection structuralsurfaceconnection = 19;
+    repeated CurveConnection structuralcurveconnection = 20;
+    repeated EdgeConnection structuraledgeconnection = 21;
+    repeated RelConnectsMember relconnectsstructuralmember = 22;
+    repeated RelConnectsSurfaceEdge relconnectssurfaceedge = 23;
+    repeated RelConnectsRigidCross relconnectsrigidcross = 24;
+    repeated RelConnectsRigidLink relconnectsrigidlink = 25;
+    repeated RelConnectsRigidMember relconnectsrigidmember = 26;
+    repeated LoadGroup structuralloadgroup = 27;
+    repeated LoadCase structuralloadcase = 28;
+    repeated LoadCombination structuralloadcombination = 29;
+    repeated PointAction structuralpointaction = 30;
+    repeated PointMoment structuralpointmoment = 31;
+    repeated CurveAction structuralcurveaction = 32;
+    repeated CurveMoment structuralcurvemoment = 33;
+    repeated SurfaceAction structuralsurfaceaction = 34;
+    repeated SurfaceActionThermal structuralsurfaceactionthermal = 35;
+    repeated CurveActionThermal structuralcurveactionthermal = 36;
+    repeated PointActionFree structuralpointactionfree = 37;
+    repeated CurveActionFree structuralcurveactionfree = 38;
+    repeated SurfaceActionFree structuralsurfaceactionfree = 39;
+    repeated SurfaceActionDistri structuralsurfaceactiondistri = 40;
+    repeated PointSupportDef structuralpointsupportdef = 41;
+    repeated ResultInternalForce1D resultinternalforce1d = 42;
+    repeated ResultInternalForce2DEdge resultinternalforce2dedge = 43;
+}
